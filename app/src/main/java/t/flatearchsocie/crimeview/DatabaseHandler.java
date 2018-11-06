@@ -388,7 +388,7 @@ public class DatabaseHandler{
 
 
             ResultSet resultSet = preparedStatement.executeQuery("DELETE FROM CRIME WHERE CRIMEID = " + CrimeID + "");
-       
+
             return true;
 
 
