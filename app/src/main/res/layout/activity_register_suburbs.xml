@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterSuburbs">
+
+    <EditText
+        android:id="@+id/editText7"
+        style="@style/Widget.AppCompat.AutoCompleteTextView"
+        android:layout_width="284dp"
+        android:layout_height="104dp"
+        android:ems="10"
+        android:inputType="textMultiLine|textPersonName"
+        android:selectAllOnFocus="false"
+        android:singleLine="false"
+        android:text="Please enter the suburbs you wish you view below:"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.DialogWindowTitle"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <ListView
+        android:layout_width="368dp"
+        android:layout_height="241dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="148dp" />
+</android.support.constraint.ConstraintLayout>

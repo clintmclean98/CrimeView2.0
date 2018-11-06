@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1012005608762",
+    "firebase_url": "https://crimeview-6117b.firebaseio.com",
+    "project_id": "crimeview-6117b",
+    "storage_bucket": "crimeview-6117b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012005608762:android:66724d2abc4d4728",
+        "android_client_info": {
+          "package_name": "t.flatearchsocie.crimeview"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1012005608762-s4bb8htr3usiur715jg5gkhckvuep139.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "t.flatearchsocie.crimeview",
+            "certificate_hash": "3a28f1494d4f60425c6459e012bcb23d2bfd1fa2"
+          }
+        },
+        {
+          "client_id": "1012005608762-tnhkvmpb2quctkchhabok2d0akt14ekj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoJfNPt1NtAWemIz-0B_rPAJXHlzUdfAU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1012005608762-tnhkvmpb2quctkchhabok2d0akt14ekj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
