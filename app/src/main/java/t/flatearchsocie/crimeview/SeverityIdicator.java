@@ -3,7 +3,9 @@ package t.flatearchsocie.crimeview;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,10 +22,11 @@ import java.util.ArrayList;
 
 import static android.graphics.Color.TRANSPARENT;
 
-public class SeverityIdicator extends FragmentActivity implements OnMapReadyCallback {
+public class SeverityIdicator extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-DatabaseHandler databaseHandler ;
+    DatabaseHandler databaseHandler ;
+    String menutype = "menu";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +36,56 @@ DatabaseHandler databaseHandler ;
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        Intent intent = this.getIntent();
+        menutype = intent.getStringExtra("menu");
+
+
+
+    }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+
+        if (menutype.equals("admin")) {
+            getMenuInflater().inflate(R.menu.adminmenu , menu);
+
+        }
+        else {
+            getMenuInflater().inflate(R.menu.mainmenu, menu);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        if (item.getItemId() == R.id.editprofile) {
+            Intent intent = new Intent(getApplicationContext(),EditProfile.class);
+
+            startActivity(intent);
+        }
+        else if (item.getItemId() == R.id.viewcrime) {
+            Intent intent = new Intent(getApplicationContext(), ViewCrimesByArea.class);
+            intent.putExtra("menu" , menutype);
+            startActivity(intent);
+        }
+        else if (item.getItemId() == R.id.managecrime) {
+            Intent intent = new Intent(getApplicationContext(), SeverityIdicator.class);
+            intent.putExtra("menu" , menutype);
+            startActivity(intent);
+        }
+        else if (item.getItemId() == R.id.banuser) {
+
+            Intent intent = new Intent(getApplicationContext(), BanUser.class);
+            intent.putExtra("menu" , menutype);
+            startActivity(intent);
+        }
+        else {
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
 
 
 
