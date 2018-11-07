@@ -1,10 +1,11 @@
 package t.flatearchsocie.crimeview;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -32,7 +33,7 @@ public class ViewCrimesByArea extends AppCompatActivity {
     String Suburb = "";
     int LocID;
     ListView listView;
-
+String menutype = "menu";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,8 @@ public class ViewCrimesByArea extends AppCompatActivity {
 
         databaseHandler = DatabaseHandler.getInstance();
         connection = databaseHandler.getCon();
-
+        Intent intent = this.getIntent();
+        menutype = intent.getStringExtra("menu");
 
         populateAreaList();
         final AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView3);
@@ -65,6 +67,52 @@ public class ViewCrimesByArea extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+
+        if (menutype.equals("admin")) {
+            getMenuInflater().inflate(R.menu.adminmenu , menu);
+
+        }
+        else {
+            getMenuInflater().inflate(R.menu.mainmenu, menu);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        if (item.getItemId() == R.id.editprofile) {
+            Intent intent = new Intent(getApplicationContext(),EditProfile.class);
+
+            startActivity(intent);
+        }
+        else if (item.getItemId() == R.id.managecrime) {
+            Intent intent = new Intent(getApplicationContext(), ManageCrime.class);
+            intent.putExtra("menu" , menutype);
+            startActivity(intent);
+        }
+        else if (item.getItemId() == R.id.viewmap) {
+            Intent intent = new Intent(getApplicationContext(), SeverityIdicator.class);
+            intent.putExtra("menu" , menutype);
+            startActivity(intent);
+        }
+        else if (item.getItemId() == R.id.banuser) {
+
+            Intent intent = new Intent(getApplicationContext(), BanUser.class);
+            intent.putExtra("menu" , menutype);
+            startActivity(intent);
+        }
+        else {
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
+
+
+
+
+    }
     public void populateAreaList() {
         String sql = "Select * From Location";
         try {

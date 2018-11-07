@@ -1,9 +1,11 @@
 package t.flatearchsocie.crimeview;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -13,11 +15,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class EditProfile extends Activity {
+public class EditProfile extends AppCompatActivity {
     DatabaseHandler databaseHandler;
     private Connection connection = null;
     private Statement preparedStatement = null;
     ResultSet resultSet = null;
+    String menutype = "menu";
 //    Button add = (Button)findViewById(R.id.button4);
 //
 //    Button remove = findViewById(R.id.button2);
@@ -41,6 +44,14 @@ public class EditProfile extends Activity {
         databaseHandler = DatabaseHandler.getInstance();
 
 
+        if (username.equals("Admin")) {
+            menutype = "admin";
+        }
+
+
+
+
+
 
 
 //        add.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +70,52 @@ public class EditProfile extends Activity {
 //            }
 //        });
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
 
+        if (username.equals("Admin")) {
+            getMenuInflater().inflate(R.menu.adminmenu , menu);
+
+        }
+        else {
+            getMenuInflater().inflate(R.menu.mainmenu, menu);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        if (item.getItemId() == R.id.managecrime) {
+            Intent intent = new Intent(getApplicationContext(), ManageCrime.class);
+            intent.putExtra("menu" , menutype);
+            startActivity(intent);
+        }
+        else if (item.getItemId() == R.id.viewcrime) {
+            Intent intent = new Intent(getApplicationContext(), ViewCrimesByArea.class);
+            intent.putExtra("menu" , menutype);
+            startActivity(intent);
+        }
+        else if (item.getItemId() == R.id.viewmap) {
+            Intent intent = new Intent(getApplicationContext(), SeverityIdicator.class);
+            intent.putExtra("menu" , menutype);
+            startActivity(intent);
+        }
+        else if (item.getItemId() == R.id.banuser) {
+
+                Intent intent = new Intent(getApplicationContext(), BanUser.class);
+            intent.putExtra("menu" , menutype);
+                startActivity(intent);
+            }
+        else {
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
+
+
+
+        
+    }
 
     public Integer getUserId() {
         return null;
@@ -114,6 +170,8 @@ public class EditProfile extends Activity {
             Toast.makeText(this, "Could not populate List with crimes", Toast.LENGTH_LONG).show();
         }
     }
+
+
 
 
 

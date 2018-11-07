@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.sql.SQLException;
-
 public class Login extends AppCompatActivity {
     DatabaseHandler databaseHandler;
 
@@ -39,6 +38,7 @@ public class Login extends AppCompatActivity {
 
     }
 
+
     public void signIn(View view) {
 
         EditText username = findViewById(R.id.edtLogin);
@@ -48,10 +48,16 @@ public class Login extends AppCompatActivity {
         try {
             if (databaseHandler.signIn( password.getText().toString() , username.getText().toString())) {
                 Toast.makeText(this, "Successful Login", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getApplicationContext(), EditProfile.class);
-                intent.putExtra("user" , username.getText().toString());
-                startActivity(intent);
-
+                if (username.getText().toString().equals("Admin")) {
+                    Intent intent = new Intent(getApplicationContext(), ManageCrime.class);
+                    intent.putExtra("menu" , "admin");
+                    startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(getApplicationContext(), EditProfile.class);
+                    intent.putExtra("user", username.getText().toString());
+                    startActivity(intent);
+                }
 
             } else {
 

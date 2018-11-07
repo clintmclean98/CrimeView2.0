@@ -1,14 +1,14 @@
 package t.flatearchsocie.crimeview;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ViewCrimes extends Activity {
+public class ViewCrimes extends AppCompatActivity {
 
     DatabaseHandler databaseHandler;
 

@@ -14,4 +14,11 @@
     <string name="SaveChangesButton">Save</string>
     <string name="hint_forPasswordChange">Enter new password</string>
     <string name="title_activity_severity_idicator">Map</string>
+    <string name="title_activity_menu">Menu</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="action_example">Example action</string>
+    <string name="title_activity_menunav">menunav</string>
 </resources>

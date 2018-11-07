@@ -1,10 +1,11 @@
 package t.flatearchsocie.crimeview;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,7 +20,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class BanUser extends Activity {
+public class BanUser extends AppCompatActivity {
 
     DatabaseHandler databaseHandler;
     private Connection connection = null;
@@ -28,11 +29,13 @@ public class BanUser extends Activity {
     ArrayList<String> ListOfUsers = new ArrayList<>();
     String Suburb;
 
+    String menutype = "menu";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ban_user);
-
+        Intent intent = this.getIntent();
+        menutype = intent.getStringExtra("menu");
         databaseHandler = DatabaseHandler.getInstance();
         connection = databaseHandler.getCon();
         fillListOfUsers();
@@ -40,6 +43,52 @@ public class BanUser extends Activity {
         populateListView();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+
+        if (menutype.equals("admin")) {
+            getMenuInflater().inflate(R.menu.adminmenu , menu);
+
+        }
+        else {
+            getMenuInflater().inflate(R.menu.mainmenu, menu);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        if (item.getItemId() == R.id.editprofile) {
+            Intent intent = new Intent(getApplicationContext(),EditProfile.class);
+
+            startActivity(intent);
+        }
+        else if (item.getItemId() == R.id.viewcrime) {
+            Intent intent = new Intent(getApplicationContext(), ViewCrimesByArea.class);
+            intent.putExtra("menu" , menutype);
+            startActivity(intent);
+        }
+        else if (item.getItemId() == R.id.viewmap) {
+            Intent intent = new Intent(getApplicationContext(), SeverityIdicator.class);
+            intent.putExtra("menu" , menutype);
+            startActivity(intent);
+        }
+        else if (item.getItemId() == R.id.managecrime) {
+
+            Intent intent = new Intent(getApplicationContext(), ManageCrime.class);
+            intent.putExtra("menu" , menutype);
+            startActivity(intent);
+        }
+        else {
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
+
+
+
+
+    }
     public void fillListOfUsers() {
         // connection = databaseHandler.getConnection();
         if (connection == null) {
